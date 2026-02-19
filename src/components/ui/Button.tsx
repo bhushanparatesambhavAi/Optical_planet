@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
 import { cn } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
 
@@ -7,6 +8,7 @@ export interface ButtonProps
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "premium"
     size?: "default" | "sm" | "lg" | "icon"
     isLoading?: boolean
+    asChild?: boolean
 }
 
 export const buttonVariants = (variant: ButtonProps["variant"] = "default", size: ButtonProps["size"] = "default", className?: string) => {
@@ -36,7 +38,19 @@ export const buttonVariants = (variant: ButtonProps["variant"] = "default", size
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant, size, isLoading, children, ...props }, ref) => {
+    ({ className, variant, size, isLoading, asChild = false, children, ...props }, ref) => {
+        if (asChild) {
+            return (
+                <Slot
+                    className={buttonVariants(variant, size, className)}
+                    ref={ref}
+                    {...props}
+                >
+                    {children}
+                </Slot>
+            )
+        }
+
         return (
             <button
                 className={buttonVariants(variant, size, className)}
