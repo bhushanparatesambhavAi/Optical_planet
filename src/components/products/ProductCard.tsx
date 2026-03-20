@@ -40,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
     return (
         <Card className="h-full border-0 shadow-none hover:shadow-xl transition-all group overflow-hidden bg-gray-50/50">
-            <CardContent className="p-0 relative">
+            <CardContent className="p-0 relative overflow-hidden">
                 {/* Badges */}
                 <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
                     {product.isNew && <Badge className="bg-green-500">New</Badge>}
@@ -58,9 +58,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
                 {/* Image Area */}
                 <div className="aspect-[4/3] relative flex items-center justify-center p-6 group-hover:scale-105 transition-transform duration-500">
-                    {/* Placeholder for real images */}
-                    <div className="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center text-gray-400 font-medium">
-                        {product.category}
+                    <img src={product.image} alt={product.name} className="w-full h-full object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                    <div className="hidden w-full h-full bg-gray-200 rounded-lg flex items-center justify-center text-gray-400 text-sm font-medium text-center px-4">
+                        {product.name}
                     </div>
                 </div>
 

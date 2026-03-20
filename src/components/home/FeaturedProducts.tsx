@@ -50,6 +50,25 @@ const PRODUCTS = [
         image: "/images/products/tomford.png",
         category: "Computer Glasses",
     },
+    {
+        id: "5",
+        name: "Aura Cat-Eye Tortoise",
+        price: 185.00,
+        rating: 4.9,
+        reviews: 56,
+        image: "/images/products/cat-eye-tortoise.png",
+        category: "Eyeglasses",
+        isNew: true,
+    },
+    {
+        id: "6",
+        name: "Voyage Metal Wireframe",
+        price: 145.00,
+        rating: 4.7,
+        reviews: 82,
+        image: "/images/products/metal-wireframe.png",
+        category: "Sunglasses",
+    },
 ]
 
 export function FeaturedProducts() {
@@ -80,7 +99,7 @@ export function FeaturedProducts() {
                             transition={{ delay: index * 0.1 }}
                         >
                             <Card className="h-full border-0 shadow-none hover:shadow-xl transition-all group overflow-hidden bg-gray-50/50">
-                                <CardContent className="p-0 relative">
+                                <CardContent className="p-0 relative overflow-hidden">
                                     {/* Badges */}
                                     <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
                                         {product.isNew && <Badge className="bg-green-500">New</Badge>}
@@ -98,9 +117,9 @@ export function FeaturedProducts() {
 
                                     {/* Image Area */}
                                     <div className="aspect-[4/3] relative flex items-center justify-center p-6 group-hover:scale-105 transition-transform duration-500">
-                                        {/* Placeholder for real images */}
-                                        <div className="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center text-gray-400">
-                                            Product Image
+                                        <img src={product.image} alt={product.name} className="w-full h-full object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                                        <div className="hidden w-full h-full bg-gray-200 rounded-lg flex items-center justify-center text-gray-400 text-sm text-center px-4 font-medium">
+                                            {product.name}
                                         </div>
                                     </div>
 

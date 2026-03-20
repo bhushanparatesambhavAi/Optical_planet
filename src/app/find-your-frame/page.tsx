@@ -107,10 +107,25 @@ export default function FindYourFramePage() {
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        {/* Products placeholder */}
-                        <div className="bg-gray-50 rounded-lg p-6 aspect-[4/3] flex items-center justify-center">Product 1</div>
-                        <div className="bg-gray-50 rounded-lg p-6 aspect-[4/3] flex items-center justify-center">Product 2</div>
-                        <div className="bg-gray-50 rounded-lg p-6 aspect-[4/3] flex items-center justify-center">Product 3</div>
+                        {/* Recommended Products */}
+                        <div className="bg-gray-50 rounded-lg p-4 flex flex-col items-center justify-center shadow-sm">
+                            <img src="/images/products/cat-eye-tortoise.png" alt="Aura Cat-Eye Tortoise" className="w-full aspect-[4/3] object-contain rounded-md mb-2" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                            <div className="hidden w-full aspect-[4/3] bg-gray-200 rounded-md mb-2 flex items-center justify-center text-xs text-gray-400">No Image</div>
+                            <h3 className="font-semibold text-gray-900 mt-2 text-center text-sm">Aura Cat-Eye Tortoise</h3>
+                            <p className="text-xs text-gray-500">Eyeglasses - Female</p>
+                        </div>
+                        <div className="bg-gray-50 rounded-lg p-4 flex flex-col items-center justify-center shadow-sm">
+                            <img src="/images/products/metal-wireframe.png" alt="Voyage Metal Wireframe" className="w-full aspect-[4/3] object-contain rounded-md mb-2" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                            <div className="hidden w-full aspect-[4/3] bg-gray-200 rounded-md mb-2 flex items-center justify-center text-xs text-gray-400">No Image</div>
+                            <h3 className="font-semibold text-gray-900 mt-2 text-center text-sm">Voyage Metal Wireframe</h3>
+                            <p className="text-xs text-gray-500">Sunglasses - Unisex</p>
+                        </div>
+                        <div className="bg-gray-50 rounded-lg p-4 flex flex-col items-center justify-center shadow-sm">
+                            <img src="/images/products/aviator.png" alt="Ray-Ban Aviator Classic" className="w-full aspect-[4/3] object-contain rounded-md mb-2" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+                            <div className="hidden w-full aspect-[4/3] bg-gray-200 rounded-md mb-2 flex items-center justify-center text-xs text-gray-400">No Image</div>
+                            <h3 className="font-semibold text-gray-900 mt-2 text-center text-sm">Ray-Ban Aviator Classic</h3>
+                            <p className="text-xs text-gray-500">Sunglasses - Male</p>
+                        </div>
                     </div>
 
                     <div className="flex gap-4 justify-center">

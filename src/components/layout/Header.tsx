@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
 import { ShoppingBag, Search, User, Menu, X, Glasses, MapPin, Home as HomeIcon, ChevronDown, Sparkles } from "lucide-react"
 import { useCartStore } from "@/store/cartStore"
 import { Button } from "@/components/ui/Button"
@@ -84,18 +84,22 @@ function MegaMenu({ isOpen, items, featured }: MegaMenuProps) {
 
 export function Header() {
     const [isScrolled, setIsScrolled] = React.useState(false)
+    const [isHidden, setIsHidden] = React.useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
     const [activeMenu, setActiveMenu] = React.useState<string | null>(null)
     const pathname = usePathname()
     const totalItems = useCartStore((state) => state.totalItems())
+    const { scrollY } = useScroll()
 
-    React.useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 0)
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious() || 0;
+        if (latest > previous && latest > 150) {
+            setIsHidden(true);
+        } else {
+            setIsHidden(false);
         }
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+        setIsScrolled(latest > 20);
+    })
 
     const navLinks = [
         {
@@ -165,12 +169,18 @@ export function Header() {
     ]
 
     return (
-        <header
+        <motion.header
+            variants={{
+                visible: { y: 0 },
+                hidden: { y: "-100%" }
+            }}
+            animate={isHidden ? "hidden" : "visible"}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+                "fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b",
                 isScrolled || activeMenu
                     ? "bg-white border-gray-100 shadow-lg py-2"
-                    : "bg-white/80 backdrop-blur-md border-transparent py-4 text-gray-900"
+                    : "bg-transparent border-transparent py-4 text-gray-900"
             )}
             onMouseLeave={() => setActiveMenu(null)}
         >
@@ -315,6 +325,6 @@ export function Header() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </header>
+        </motion.header>
     )
 }

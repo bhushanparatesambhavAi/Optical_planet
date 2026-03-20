@@ -62,6 +62,28 @@ const MOCK_PRODUCTS = [
         reviews: 34,
         image: "/images/products/prada.png",
         category: "Sport",
+        gender: "Male"
+    },
+    {
+        id: "7",
+        name: "Aura Cat-Eye Tortoise",
+        price: 185.00,
+        rating: 4.9,
+        reviews: 56,
+        image: "/images/products/cat-eye-tortoise.png",
+        category: "Eyeglasses",
+        gender: "Female",
+        isNew: true,
+    },
+    {
+        id: "8",
+        name: "Voyage Metal Wireframe",
+        price: 145.00,
+        rating: 4.7,
+        reviews: 82,
+        image: "/images/products/metal-wireframe.png",
+        category: "Sunglasses",
+        gender: "Unisex",
     },
 ]
 
